@@ -2,7 +2,7 @@ name: Push commit
 on:
   push:
     branches:
-      - 'release/*'
+      - main
 
 jobs:
   report:
@@ -38,6 +38,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN  }}
           branch: "test/01.1"
+          base: main
           commit-message: "[GitHub Dependents Info] Updated markdown file(s)"
           delete-branch: false
           title: "[GitHub Dependents Info] Updated markdown file"
