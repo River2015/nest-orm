@@ -39,8 +39,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN  }}
           branch: "test/01.1"
           base: main
+          commiter: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_NAME }}>
+          author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_NAME }}>
           commit-message: "[GitHub Dependents Info] Updated markdown file(s)"
-          delete-branch: false
+          delete-branch: true
           title: "[GitHub Dependents Info] Updated markdown file"
           body: "_Generated with [github-dependents-info](https://github.com/nvuillam/github-dependents-info), by [Nicolas Vuillamy](https://github.com/nvuillam)_"
       - name: Create PR output
