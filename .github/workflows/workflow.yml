@@ -12,19 +12,36 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
-      - name: Test code
-        run: echo '${{toJSON(secrets)}}'
+      - name: Expose git commit data
+        uses: rlespinasse/git-commit-data-action@v1
+
+      - name: Print git commit data
+        run: |
+          echo "Get commit info"
+          echo " - ${{ env.GIT_COMMIT_SHA }}"
+          echo " - ${{ env.GIT_COMMIT_SHORT_SHA }}"
+          echo "Get author info"
+          echo " - ${{ env.GIT_COMMIT_AUTHOR }}"
+          echo " - ${{ env.GIT_COMMIT_AUTHOR_NAME }}"
+          echo " - ${{ env.GIT_COMMIT_AUTHOR_EMAIL }}"
+          echo "Get committer info"
+          echo " - ${{ env.GIT_COMMIT_COMMITTER }}"
+          echo " - ${{ env.GIT_COMMIT_COMMITTER_NAME }}"
+          echo " - ${{ env.GIT_COMMIT_COMMITTER_EMAIL }}"
+          echo "Get message info"
+          echo " - ${{ env.GIT_COMMIT_MESSAGE_SUBJECT }}"
+          echo " - ${{ env.GIT_COMMIT_MESSAGE_SUBJECT_SANITIZED }}"
+          echo " - ${{ env.GIT_COMMIT_MESSAGE_BODY }}"
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN  }}
-          branch: main
+          branch: test/01.1
           commit-message: "[GitHub Dependents Info] Updated markdown file(s)"
           delete-branch: false
           title: "[GitHub Dependents Info] Updated markdown file"
           body: "_Generated with [github-dependents-info](https://github.com/nvuillam/github-dependents-info), by [Nicolas Vuillamy](https://github.com/nvuillam)_"
-          labels: documentation
       - name: Create PR output
         run: |
           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
