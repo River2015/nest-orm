@@ -37,7 +37,7 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN  }}
-          branch: test/01.1
+          branch: "test/01.1"
           commit-message: "[GitHub Dependents Info] Updated markdown file(s)"
           delete-branch: false
           title: "[GitHub Dependents Info] Updated markdown file"
