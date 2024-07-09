@@ -8,8 +8,8 @@ jobs:
   report:
     runs-on: ubuntu-latest
     permissions:
-      content: write
-      pull-request: write
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
       - name: Test code
