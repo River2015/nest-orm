@@ -1,4 +1,4 @@
-name: Test pull request1
+name: Test pull request2
 on:
   push:
     branches:
