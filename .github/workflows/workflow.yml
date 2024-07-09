@@ -1,13 +1,13 @@
 name: Test pull request
-  on:
-    push:
-      branches:
-        - 'test/**'
-  jobs:
-    my-job:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-        - name: Test code
-          run: echo 'Done'
+on:
+  push:
+    branches:
+      - 'test/**'
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Test code
+        run: echo 'Done'
