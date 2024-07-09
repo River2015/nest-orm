@@ -7,12 +7,25 @@ on:
 jobs:
   report:
     runs-on: ubuntu-latest
+    permissions:
+      content: write
+      pull-request: write
     steps:
       - uses: actions/checkout@v4
       - name: Test code
         run: echo '${{toJSON(secrets)}}'
-      - name: Create pul request
+      - name: Create Pull Request
+        id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: Auto pull request
+          token: ${{ secrets.GITHUB_TOKEN  }}
           branch: main
+          commit-message: "[GitHub Dependents Info] Updated markdown file(s)"
+          delete-branch: false
+          title: "[GitHub Dependents Info] Updated markdown file"
+          body: "_Generated with [github-dependents-info](https://github.com/nvuillam/github-dependents-info), by [Nicolas Vuillamy](https://github.com/nvuillam)_"
+          labels: documentation
+      - name: Create PR output
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
